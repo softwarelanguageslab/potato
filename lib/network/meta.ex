@@ -39,6 +39,11 @@ defmodule Potato.Network.Meta do
   def set_local_nd(map), do: call(__MODULE__, {:set_local_nd, map})
 
   @doc """
+  Returns the local node descriptor.
+  """
+  def get_local_nd(), do: call(__MODULE__, :get_local_nd)
+
+  @doc """
   Returns a list of the currently connected network descriptors.
   """
   def current_network(), do: call(__MODULE__, :current_network)
@@ -47,10 +52,6 @@ defmodule Potato.Network.Meta do
   Prints out some data of the local network. Useful for debugging.
   """
   def dump(), do: call(__MODULE__, :dump)
-
-  @doc """
-  
-  """
 
   #
   # ------------------------ Callbacks
@@ -73,6 +74,10 @@ defmodule Potato.Network.Meta do
     # Notify the network that we have updated our ND.
     broadcast_local_node_descriptor(new_state)
     {:reply, :ok, new_state}
+  end
+
+  def handle_call(:get_local_nd, _from, state = %{self: self}) do
+    {:reply, self, state}
   end
 
   def handle_call(:current_network, _from, state) do

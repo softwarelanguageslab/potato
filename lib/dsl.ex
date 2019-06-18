@@ -17,10 +17,18 @@ defmodule Potato.DSL do
   #
 
   @doc """
-  broadcast() evaluates to the local node descriptor.
+  broadcast() evaluates to the local broadcast subject.
   """
   def broadcast() do
     broadcast = Potato.Network.Observables.broadcast()
     broadcast
   end
+
+  @doc """
+  msyelf() evaluates to the local node descriptor.
+  """
+  def myself() do
+    nd = Potato.Network.Meta.get_local_nd()
+    nd
+  end  
 end

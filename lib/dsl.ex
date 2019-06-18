@@ -17,10 +17,10 @@ defmodule Potato.DSL do
   #
 
   @doc """
-  myself() evaluates to the local node descriptor.
+  broadcast() evaluates to the local node descriptor.
   """
-  def myself() do
-    myself = Potato.Network.Observables.myself()
-    myself
+  def broadcast() do
+    broadcast = Potato.Network.Observables.broadcast()
+    broadcast
   end
 end

@@ -24,9 +24,9 @@ defmodule Potato.Network.Meta do
     # We safely assume it has been started before us.
     deployment_subject = Potato.Network.Observables.deployment()
 
-    myself_subject = Potato.Network.Observables.myself()
+    broadcast_subject = Potato.Network.Observables.broadcast()
 
-    {:ok, %Meta{self: %{:deploy => deployment_subject, :myself => myself_subject}}}
+    {:ok, %Meta{self: %{:deploy => deployment_subject, :broadcast => broadcast_subject}}}
   end
 
   #

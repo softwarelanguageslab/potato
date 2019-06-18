@@ -25,9 +25,9 @@ defmodule Potato.Network.Observables do
     deployment = Observables.Subject.create()
 
     # The subject which will allow the local runtime to publish values to the network.
-    myself = Observables.Subject.create()
+    broadcast = Observables.Subject.create()
 
-    state = %{:network => network, :bluetooth => bluetooth, :deployment => deployment, :myself => myself}
+    state = %{:network => network, :bluetooth => bluetooth, :deployment => deployment, :broadcast => broadcast}
     {:ok, state}
   end
 
@@ -41,7 +41,7 @@ defmodule Potato.Network.Observables do
 
   def deployment(), do: call(__MODULE__, :deployment)
 
-  def myself(), do: call(__MODULE__, :myself)
+  def broadcast(), do: call(__MODULE__, :broadcast)
 
   #
   # ------------------------ Callbacks 
@@ -76,7 +76,7 @@ defmodule Potato.Network.Observables do
     {:reply, state.deployment, state}
   end
 
-  def handle_call(:myself, _from, state) do
-    {:reply, state.myself, state}
+  def handle_call(:broadcast, _from, state) do
+    {:reply, state.broadcast, state}
   end
 end
